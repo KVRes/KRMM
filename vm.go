@@ -11,3 +11,11 @@ func NewVM() *VM {
 		heap:  NewLayer(LayerType_Heap),
 	}
 }
+
+func (v *VM) Stack() *Stack {
+	return v.stack
+}
+
+func (v *VM) Heap() *Layer {
+	return v.heap
+}

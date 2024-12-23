@@ -1,5 +1,7 @@
 package KRU
 
+import omap "github.com/wk8/go-ordered-map/v2"
+
 type LayerType int
 
 const (
@@ -9,27 +11,36 @@ const (
 )
 
 type Layer struct {
-	m map[string]*Element
+	m *omap.OrderedMap[string, *Element]
 	t LayerType
 }
 
 func NewLayer(t LayerType) *Layer {
 	return &Layer{
-		m: make(map[string]*Element),
+		m: omap.New[string, *Element](),
 		t: t,
 	}
 }
 
-func (l *Layer) Add(key string, data any) {
-	l.m[key] = &Element{Data: data}
+func (l *Layer) Set(key string, data any) {
+	l.m.Set(key, &Element{Data: data})
 }
 
 func (l *Layer) Get(key string) *Element {
-	return l.m[key]
+	elem, _ := l.m.Get(key)
+	return elem
 }
 
 func (l *Layer) Remove(key string) {
-	delete(l.m, key)
+	l.m.Delete(key)
+}
+
+func (l *Layer) Len() int {
+	return l.m.Len()
+}
+
+func (l *Layer) Raw() *omap.OrderedMap[string, *Element] {
+	return l.m
 }
 
 type Element struct {
