@@ -1,4 +1,4 @@
-package KRU
+package KRMM
 
 import (
 	"sync"

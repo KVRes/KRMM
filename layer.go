@@ -1,4 +1,4 @@
-package KRU
+package KRMM
 
 import omap "github.com/wk8/go-ordered-map/v2"
 

@@ -1,4 +1,4 @@
-package KRU
+package KRMM
 
 type VM struct {
 	stack *Stack
